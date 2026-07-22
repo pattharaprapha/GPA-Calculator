@@ -1,29 +1,46 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>GPA Calculator</title>
+
     <link rel="stylesheet" href="style.css">
+
 </head>
+
+
 <body>
+
 
 <div class="container">
 
+
     <h1>📚 GPA Calculator</h1>
 
+
+
     <div class="input-group">
+
 
         <input
             type="text"
             id="subject"
             placeholder="ชื่อวิชา">
 
+
+
+        <!-- หน่วยกิต รับเฉพาะตัวเลข -->
         <input
-            type="number"
+            type="text"
             id="credit"
             placeholder="หน่วยกิต"
-            min="1">
+            inputmode="numeric">
+
+
 
         <input
             type="number"
@@ -32,51 +49,100 @@
             min="0"
             max="100">
 
+
+
         <button id="addBtn">
             เพิ่มรายวิชา
         </button>
 
+
     </div>
+
+
+
+
 
     <table>
 
+
         <thead>
 
+
             <tr>
+
                 <th>วิชา</th>
+
                 <th>หน่วยกิต</th>
+
                 <th>คะแนน</th>
+
                 <th>เกรด</th>
+
                 <th>แต้มเกรด</th>
+
                 <th>คะแนนรวม</th>
+
                 <th>ลบ</th>
+
             </tr>
+
 
         </thead>
 
+
+
         <tbody id="tableBody"></tbody>
+
+
 
     </table>
 
+
+
+
+
     <h2 id="gpaResult">
+
         GPA : 0.00
+
     </h2>
+
+
+
+
 
     <div class="footer-info">
 
+
         <p class="developer-name">
+
             Name : Pattharaprapha Wongmuengklang
+
         </p>
 
+
+
         <p class="course-name">
+
             Select Topic Software
+
         </p>
+
+
 
     </div>
 
+
+
 </div>
+
+
+
 
 <script src="script.js"></script>
 
+
 </body>
+
+
 </html>
