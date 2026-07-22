@@ -4,6 +4,7 @@ const scoreInput = document.querySelector("#score");
 const addBtn = document.querySelector("#addBtn");
 const tableBody = document.querySelector("#tableBody");
 const gpaResult = document.querySelector("#gpaResult");
+const creditInput = document.querySelector("#credit");
 
 let courses = [];
 
@@ -164,5 +165,11 @@ function renderTable() {
 
     });
 
+// ป้องกันหน่วยกิตใส่จุดทศนิยม
+    creditInput.addEventListener("input", function () {
+
+        this.value = this.value.replace(/[^0-9]/g, "");
+
+    });
 
 }
