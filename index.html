@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>📚 GPA Calculator</h1>
+
+    <div class="input-group">
+        <input type="text" id="subject" placeholder="ชื่อวิชา">
+
+        <input type="number" id="credit" placeholder="หน่วยกิต" min="1">
+
+        <select id="grade">
+            <option value="4">A</option>
+            <option value="3.5">B+</option>
+            <option value="3">B</option>
+            <option value="2.5">C+</option>
+            <option value="2">C</option>
+            <option value="1.5">D+</option>
+            <option value="1">D</option>
+            <option value="0">F</option>
+        </select>
+
+        <button id="addBtn">เพิ่มรายวิชา</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>วิชา</th>
+                <th>หน่วยกิต</th>
+                <th>เกรด</th>
+                <th>คะแนน</th>
+                <th>ลบ</th>
+            </tr>
+        </thead>
+
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <h2 id="gpaResult">GPA : 0.00</h2>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
