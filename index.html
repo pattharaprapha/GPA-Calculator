@@ -13,43 +13,65 @@
     <h1>📚 GPA Calculator</h1>
 
     <div class="input-group">
-        <input type="text" id="subject" placeholder="ชื่อวิชา">
 
-        <input type="number" id="credit" placeholder="หน่วยกิต" min="1">
+        <input
+            type="text"
+            id="subject"
+            placeholder="ชื่อวิชา">
 
-        <select id="grade">
-            <option value="4">A</option>
-            <option value="3.5">B+</option>
-            <option value="3">B</option>
-            <option value="2.5">C+</option>
-            <option value="2">C</option>
-            <option value="1.5">D+</option>
-            <option value="1">D</option>
-            <option value="0">F</option>
-        </select>
+        <input
+            type="number"
+            id="credit"
+            placeholder="หน่วยกิต"
+            min="1">
 
-        <button id="addBtn">เพิ่มรายวิชา</button>
+        <input
+            type="number"
+            id="score"
+            placeholder="คะแนน (0-100)"
+            min="0"
+            max="100">
+
+        <button id="addBtn">
+            เพิ่มรายวิชา
+        </button>
+
     </div>
 
     <table>
+
         <thead>
+
             <tr>
                 <th>วิชา</th>
                 <th>หน่วยกิต</th>
-                <th>เกรด</th>
                 <th>คะแนน</th>
+                <th>เกรด</th>
+                <th>แต้มเกรด</th>
+                <th>คะแนนรวม</th>
                 <th>ลบ</th>
             </tr>
+
         </thead>
 
         <tbody id="tableBody"></tbody>
+
     </table>
 
-    <h2 id="gpaResult">GPA : 0.00</h2>
+    <h2 id="gpaResult">
+        GPA : 0.00
+    </h2>
 
     <div class="footer-info">
-        <p class="developer-name">Name:Pattharaprapha Wongmuengklang</p>
-        <p class="course-name">วิชา:Select Topic Software</p>
+
+        <p class="developer-name">
+            Name : Pattharaprapha Wongmuengklang
+        </p>
+
+        <p class="course-name">
+            Select Topic Software
+        </p>
+
     </div>
 
 </div>
