@@ -35,7 +35,7 @@ function getGrade(score) {
 function addCourse() {
 
     const subject = subjectInput.value.trim();
-    const credit = Number(creditInput.value);
+    const credit = parseInt(creditInput.value);
     const score = Number(scoreInput.value);
 
 
@@ -165,11 +165,37 @@ function renderTable() {
 
     });
 
-// ป้องกันหน่วยกิตใส่จุดทศนิยม
-    creditInput.addEventListener("input", function () {
+// ป้องกันช่องหน่วยกิตใส่ทศนิยม
+creditInput.addEventListener("keydown", function(event) {
 
-        this.value = this.value.replace(/[^0-9]/g, "");
+    // ป้องกัน . และ ,
+    if (event.key === "." || event.key === ",") {
+        event.preventDefault();
+    }
 
-    });
+    // ป้องกันตัวอักษร
+    if (
+        !/[0-9]/.test(event.key) &&
+        event.key !== "Backspace" &&
+        event.key !== "Delete" &&
+        event.key !== "ArrowLeft" &&
+        event.key !== "ArrowRight" &&
+        event.key !== "Tab"
+    ) {
+        event.preventDefault();
+    }
+
+});
+
+
+// กันกรณี paste ค่า 2.5
+creditInput.addEventListener("input", function() {
+
+    this.value = this.value.replace(/\D/g, "");
+
+});
+
+
+
 
 }
