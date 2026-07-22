@@ -4,21 +4,69 @@ const scoreInput = document.querySelector("#score");
 const addBtn = document.querySelector("#addBtn");
 const tableBody = document.querySelector("#tableBody");
 const gpaResult = document.querySelector("#gpaResult");
-const creditInput = document.querySelector("#credit");
+
 
 let courses = [];
 
-// ป้องกันการพิมพ์จุดทศนิยมในช่องหน่วยกิต
+
+// ==============================
+// ป้องกันช่องหน่วยกิตใส่ทศนิยม
+// ==============================
+
 creditInput.addEventListener("keydown", function (event) {
-    if (event.key === "." || event.key === ",") {
+
+    const allowedKeys = [
+        "Backspace",
+        "Delete",
+        "ArrowLeft",
+        "ArrowRight",
+        "Tab"
+    ];
+
+
+    // ไม่ให้กด . , e + -
+    if (
+        event.key === "." ||
+        event.key === "," ||
+        event.key === "e" ||
+        event.key === "E" ||
+        event.key === "+" ||
+        event.key === "-"
+    ) {
         event.preventDefault();
     }
+
+
+    // อนุญาตเฉพาะตัวเลข
+    if (
+        !/[0-9]/.test(event.key) &&
+        !allowedKeys.includes(event.key)
+    ) {
+        event.preventDefault();
+    }
+
 });
+
+
+// ป้องกันการวางค่า เช่น 2.5
+creditInput.addEventListener("input", function () {
+
+    this.value = this.value.replace(/[^0-9]/g, "");
+
+});
+
+
+
+
 
 addBtn.addEventListener("click", addCourse);
 
 
+
+
+
 function getGrade(score) {
+
 
     if (score >= 80) return { letter: "A", point: 4.0 };
     if (score >= 75) return { letter: "B+", point: 3.5 };
@@ -28,55 +76,89 @@ function getGrade(score) {
     if (score >= 55) return { letter: "D+", point: 1.5 };
     if (score >= 50) return { letter: "D", point: 1.0 };
 
+
     return { letter: "F", point: 0 };
+
 }
+
+
+
 
 
 function addCourse() {
 
+
     const subject = subjectInput.value.trim();
-    const credit = parseInt(creditInput.value);
+
+    const credit = Number(creditInput.value);
+
     const score = Number(scoreInput.value);
 
 
-    // ตรวจสอบข้อมูล
+
     if (
+
         subject === "" ||
+
         credit <= 0 ||
+
         !Number.isInteger(credit) ||
+
         score < 0 ||
+
         score > 100 ||
+
         Number.isNaN(score)
+
     ) {
+
 
         alert("กรุณากรอกข้อมูลให้ถูกต้อง (หน่วยกิตต้องเป็นจำนวนเต็ม)");
 
         return;
+
     }
+
+
+
 
 
     const grade = getGrade(score);
 
 
+
     courses.push({
 
         subject,
+
         credit,
+
         score,
+
         letter: grade.letter,
+
         point: grade.point
 
     });
 
 
+
+
+
     renderTable();
 
 
+
+
     subjectInput.value = "";
+
     creditInput.value = "";
+
     scoreInput.value = "";
 
 }
+
+
 
 
 
@@ -87,7 +169,10 @@ function renderTable() {
 
 
     let totalCredit = 0;
+
     let totalPoint = 0;
+
+
 
 
 
@@ -97,8 +182,12 @@ function renderTable() {
         const gradePoint = course.credit * course.point;
 
 
+
         totalCredit += course.credit;
+
         totalPoint += gradePoint;
+
+
 
 
 
@@ -118,13 +207,16 @@ function renderTable() {
 
             <td>${gradePoint.toFixed(2)}</td>
 
+
             <td>
 
                 <button class="deleteBtn" data-index="${index}">
                     ลบ
                 </button>
 
+
             </td>
+
 
         </tr>
 
@@ -135,9 +227,15 @@ function renderTable() {
 
 
 
-    const gpa = totalCredit === 0 
-        ? 0 
+
+
+    const gpa = totalCredit === 0
+
+        ? 0
+
         : totalPoint / totalCredit;
+
+
 
 
 
@@ -145,56 +243,34 @@ function renderTable() {
 
 
 
+
+
+
     document.querySelectorAll(".deleteBtn").forEach(button => {
 
 
-        button.addEventListener("click", (event) => {
+
+        button.addEventListener("click", function(event) {
+
 
 
             const index = Number(event.target.dataset.index);
 
 
+
             courses.splice(index, 1);
+
 
 
             renderTable();
 
 
+
         });
 
 
+
     });
-
-// ป้องกันช่องหน่วยกิตใส่ทศนิยม
-creditInput.addEventListener("keydown", function(event) {
-
-    // ป้องกัน . และ ,
-    if (event.key === "." || event.key === ",") {
-        event.preventDefault();
-    }
-
-    // ป้องกันตัวอักษร
-    if (
-        !/[0-9]/.test(event.key) &&
-        event.key !== "Backspace" &&
-        event.key !== "Delete" &&
-        event.key !== "ArrowLeft" &&
-        event.key !== "ArrowRight" &&
-        event.key !== "Tab"
-    ) {
-        event.preventDefault();
-    }
-
-});
-
-
-// กันกรณี paste ค่า 2.5
-creditInput.addEventListener("input", function() {
-
-    this.value = this.value.replace(/\D/g, "");
-
-});
-
 
 
 
